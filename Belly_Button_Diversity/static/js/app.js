@@ -1,0 +1,78 @@
+// function buildMetadata(sample) {
+  
+  function unpack(rows, index) {
+    return rows.map(function(row) {
+      return row[index];
+    });
+  }
+  // @TODO: Complete the following function that builds the metadata panel
+
+  // Use `d3.json` to fetch the metadata for a sample
+    // Use d3 to select the panel with id of `#sample-metadata`
+
+    var fileName = "samples.json";
+    d3.json(fileName).then(function(data) {
+    //   var id = unpack(data.dataset.data, 0);
+    //   var ethnicity = unpack(data.dataset.data, 1);
+    //   var gender = data.dataset.gender;
+    //   var age = data.dataset.age;
+    //   var location = data.dataset.location;
+    //   var bbtype = data.dataset.bbtype;
+    //   var wfreq = data.dataset.wfreq;
+    // })}
+
+    console.log("hi");
+    });
+
+//     console.log(data);
+//     console.log(id);
+//     console.log(ethnicity);
+//     console.log(gender);
+//     // Use `.html("") to clear any existing metadata
+
+//     // Use `Object.entries` to add each key and value pair to the panel
+//     // Hint: Inside the loop, you will need to use d3 to append new
+//     // tags for each key-value in the metadata.
+
+//     // BONUS: Build the Gauge Chart
+//     // buildGauge(data.WFREQ);
+// }
+
+// function buildCharts(sample) {
+
+//   // @TODO: Use `d3.json` to fetch the sample data for the plots
+
+//     // @TODO: Build a Bubble Chart using the sample data
+
+//     // @TODO: Build a Pie Chart
+//     // HINT: You will need to use slice() to grab the top 10 sample_values,
+//     // otu_ids, and labels (10 each).
+// }
+
+// function init() {
+//   // Grab a reference to the dropdown select element
+//   var selector = d3.select("#selDataset");
+
+//   // Use the list of sample names to populate the select options
+//   d3.json("/names").then((sampleNames) => {
+//     sampleNames.forEach((sample) => {
+//       selector
+//         .append("option")
+//         .text(sample)
+//         .property("value", sample);
+//     });
+
+//     // Use the first sample from the list to build the initial plots
+//     const firstSample = sampleNames[0];
+//     buildCharts(firstSample);
+//     buildMetadata(firstSample);
+//   });
+// }
+
+// function optionChanged(newSample) {
+//   // Fetch new data each time a new sample is selected
+//   buildCharts(newSample);
+// }
+
+// // Initialize the dashboard
+// init();
