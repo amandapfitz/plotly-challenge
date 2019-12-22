@@ -39,29 +39,49 @@ function buildCharts(sample) {
     data.samples.forEach((data) => {
     if (sample == data.id) {
     var id = data.id;
-    console.log(id);
-    id = id.slice(0,10);
+    // id = id.slice(0,10);
     var otuID = data.otu_ids;
-    otuID = otuID.slice(0,10);
+    // otuID = otuID.slice(0,10);
     var sampleVal = data.sample_values;
-    sampleVal = sampleVal.slice(0,10);
-    // var otuLabel = unpack(data.samples, "otu_labels");
+    // sampleVal = sampleVal.slice(0,10);
+    var otuLabel = data.otu_labels;
     // otuLabel = otuLabel.slice(0,10);
     
  
-
-    
-    // console.log(otuID);
-    // console.log(sampleVal);
-    // console.log(otuLabel);
     // @TODO: Build a Bubble Chart using the sample data
+    var desired_maximum_marker_size = Math.max(sampleVal);
+    var size = sampleVal;
+    var trace2 = {
+      x: otuID,
+      y: sampleVal,
+      text: otuLabel,
+      mode: 'markers',
+      marker: {
+        color: otuID,
+        size: size,
+        //set 'sizeref' to an 'ideal' size given by the formula sizeref = 2. * max(array_of_size_values) / (desired_maximum_marker_size ** 2)
+        // sizeref: 2.0 * Math.max(...size) / (desired_maximum_marker_size**2),
+        sizemode: 'area'
+      }
+    };
+    
+    var data = [trace2];
+    
+    var layout = {
+      title: 'Bubble Chart Size Scaling',
+      showlegend: false,
+      height: 600,
+      width: 600
+    };
+    
+    Plotly.newPlot('bubble', data, layout);
 
     // @TODO: Build a Pie Chart
     // HINT: You will need to use slice() to grab the top 10 sample_values,
     // otu_ids, and labels (10 each).
     var trace1 = {
-        labels: otuID,
-        values: sampleVal,
+        labels: otuID.slice(0,10),
+        values: sampleVal.slice(0,10),
         type: 'pie'
       };
       
