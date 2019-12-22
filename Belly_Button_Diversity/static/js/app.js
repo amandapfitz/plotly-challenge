@@ -1,7 +1,11 @@
 function buildMetadata(sample) {
       // console.log(sample);
+    // Use `d3.json` to fetch the metadata for a sample
+      // Use d3 to select the panel with id of `#sample-metadata`
       var panel = d3.select("#sample-metadata");
+      // Use `.html("") to clear any existing metadata
       panel.html("");
+      // Use `Object.entries` to add each key and value pair to the panel
       d3.json("samples.json").then((samplesData) => {
         // console.log(samplesData.metadata);
         samplesData.metadata.forEach((entry) => {
@@ -11,7 +15,7 @@ function buildMetadata(sample) {
               panel
                 .append("h6")
                 .text(`${key}: ${value}`);
-                console.log(key, value);
+                // console.log(key, value);
             });
           }
         });
@@ -31,13 +35,22 @@ function buildCharts(sample) {
   }
   // @TODO: Use `d3.json` to fetch the sample data for the plots
   var fileName = "samples.json"
-  d3.json(fileName).then(function(data) {
-    var id = unpack(data.samples, "id");
-    var otuID = unpack(data.samples, "otu_ids");
-    var sampleVal = unpack(data.samples, "sample_values");
-    var otuLabel = unpack(data.samples, "otu_labels");
+  d3.json(fileName).then((data) => {
+    data.samples.forEach((data) => {
+    if (sample == data.id) {
+    var id = data.id;
+    console.log(id);
+    id = id.slice(0,10);
+    var otuID = data.otu_ids;
+    otuID = otuID.slice(0,10);
+    var sampleVal = data.sample_values;
+    sampleVal = sampleVal.slice(0,10);
+    // var otuLabel = unpack(data.samples, "otu_labels");
+    // otuLabel = otuLabel.slice(0,10);
+    
+ 
 
-    // console.log(id);
+    
     // console.log(otuID);
     // console.log(sampleVal);
     // console.log(otuLabel);
@@ -46,9 +59,23 @@ function buildCharts(sample) {
     // @TODO: Build a Pie Chart
     // HINT: You will need to use slice() to grab the top 10 sample_values,
     // otu_ids, and labels (10 each).
-
-    // Plotly.newPlot("pie",data,layout)
+    var trace1 = {
+        labels: otuID,
+        values: sampleVal,
+        type: 'pie'
+      };
+      
+      var data = [trace1];
+      
+      var layout = {
+        title: "",
+      };
+      
+      Plotly.newPlot("pie", data, layout);
+    }
+  }); 
   });
+
 }
 
 function init() {
